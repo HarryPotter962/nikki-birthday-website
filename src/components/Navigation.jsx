@@ -100,7 +100,7 @@ export default function Navigation() {
           className="glass mx-auto flex items-center gap-2 rounded-full px-5 py-3 text-xs tracking-wide"
         >
           <span>{open ? "✕" : "✦"}</span>
-          {Math.round(progress)}% of your journey
+          {open ? "Close menu" : "Open menu"}
         </button>
       </div>
     </>

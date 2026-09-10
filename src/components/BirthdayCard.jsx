@@ -86,14 +86,14 @@ export default function BirthdayCard({ onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-[oklch(0.08_0.04_330_/_90%)] p-3 backdrop-blur-xl sm:p-6"
+      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto bg-[oklch(0.08_0.04_330_/_90%)] p-3 backdrop-blur-xl sm:items-center sm:p-6"
       onClick={closeCard}
     >
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.94 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.96 }}
-        className="birthday-card-modal relative flex max-h-[96svh] w-full max-w-5xl flex-col items-center gap-4"
+        className="birthday-card-modal relative my-auto flex max-h-[calc(100svh-1.5rem)] w-full max-w-5xl flex-col items-center gap-4 overflow-y-auto py-1 sm:max-h-[96svh] sm:py-0"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex w-full items-center justify-between px-2 text-sm text-paper/80 sm:px-4">

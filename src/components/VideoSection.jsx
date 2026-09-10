@@ -41,6 +41,8 @@ function VideoCard({ video, index, onOpen }) {
 export default function VideoSection() {
   const videoRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     if (!activeVideo) return;
@@ -54,11 +56,15 @@ export default function VideoSection() {
   }, [activeVideo]);
 
   const openVideo = (video) => {
+    setIsPlaying(false);
+    setIsDownloading(false);
     setActiveVideo(video);
   };
 
   const closeVideo = () => {
     videoRef.current?.pause();
+    setIsPlaying(false);
+    setIsDownloading(false);
     videoRef.current = null;
     setActiveVideo(null);
   };
@@ -66,28 +72,42 @@ export default function VideoSection() {
   const pauseVideo = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
       return;
     }
     videoRef.current.pause();
+    setIsPlaying(false);
   };
 
   const stopVideo = () => {
     if (!videoRef.current) return;
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
+    setIsPlaying(false);
   };
 
-  const downloadVideo = () => {
-    if (!activeVideo?.src) return;
+  const downloadVideo = async () => {
+    if (!activeVideo?.src || isDownloading) return;
 
-    const link = document.createElement("a");
-    link.href = activeVideo.src;
-    link.download = `${(activeVideo.title || "video").replace(/\s+/g, "-").toLowerCase()}.mp4`;
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const filename = `${(activeVideo.title || "video").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.mp4`;
+    setIsDownloading(true);
+
+    try {
+      const response = await fetch(activeVideo.src);
+      if (!response.ok) throw new Error("Video download failed");
+      const blobUrl = URL.createObjectURL(await response.blob());
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch {
+      window.open(activeVideo.src, "_blank", "noopener,noreferrer");
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -118,6 +138,8 @@ export default function VideoSection() {
               controls
               playsInline
               preload="auto"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
               className="max-h-[70vh] w-full rounded-2xl bg-black object-contain"
             />
 
@@ -127,14 +149,14 @@ export default function VideoSection() {
                 <p className="mt-1 text-sm text-muted-foreground">{activeVideo.description}</p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button type="button" onClick={pauseVideo} className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground transition hover:opacity-90">
-                  <Pause size={16} /> {videoRef.current?.paused ? "Play" : "Pause"}
+                <button type="button" onClick={pauseVideo} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground transition hover:opacity-90">
+                  {isPlaying ? <Pause size={16} /> : <Play size={16} />} {isPlaying ? "Pause" : "Play"}
                 </button>
-                <button type="button" onClick={stopVideo} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted">
+                <button type="button" onClick={stopVideo} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted">
                   <Square size={16} /> Stop
                 </button>
-                <button type="button" onClick={downloadVideo} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted">
-                  <Download size={16} /> Download if you want baby😘
+                <button type="button" onClick={downloadVideo} disabled={isDownloading} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted disabled:cursor-wait disabled:opacity-60">
+                  <Download size={16} /> Download
                 </button>
               </div>
             </div>

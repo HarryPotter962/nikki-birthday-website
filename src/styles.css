@@ -392,7 +392,17 @@
 
   .birthday-card-stage {
     width: 92vw;
-    height: min(62svh, 650px);
+    height: min(48svh, 500px);
+    min-height: 250px;
+  }
+
+  .birthday-card-modal {
+    justify-content: flex-start;
+  }
+
+  .birthday-card-song-button,
+  .birthday-card-control {
+    min-height: 2.75rem;
   }
 
   .birthday-card-page {
