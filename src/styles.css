@@ -1,0 +1,520 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Nikki's Birthday — design system
+ * Deep romantic night: plum/wine backgrounds, rose + gold accents,
+ * cream typography, soft glow and glass surfaces.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rose: var(--rose);
+  --color-gold: var(--gold);
+  --color-plum: var(--plum);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Dancing Script", cursive;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.16 0.06 330);
+  --foreground: oklch(0.96 0.015 60);
+  --card: oklch(0.23 0.07 330);
+  --card-foreground: oklch(0.96 0.015 60);
+  --popover: oklch(0.2 0.07 330);
+  --popover-foreground: oklch(0.96 0.015 60);
+  --primary: oklch(0.7 0.18 5);
+  --primary-foreground: oklch(0.99 0.01 60);
+  --secondary: oklch(0.3 0.08 320);
+  --secondary-foreground: oklch(0.96 0.015 60);
+  --muted: oklch(0.28 0.05 325);
+  --muted-foreground: oklch(0.78 0.03 340);
+  --accent: oklch(0.82 0.13 85);
+  --accent-foreground: oklch(0.2 0.06 330);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 60);
+  --border: oklch(0.98 0.02 60 / 14%);
+  --input: oklch(0.98 0.02 60 / 18%);
+  --ring: oklch(0.7 0.18 5);
+  --rose: oklch(0.74 0.17 3);
+  --gold: oklch(0.85 0.12 85);
+  --plum: oklch(0.28 0.09 322);
+  --ink: oklch(0.28 0.04 30);
+  --paper: oklch(0.97 0.02 85);
+
+  --gradient-night: radial-gradient(
+      110% 90% at 50% 0%,
+      oklch(0.3 0.11 328) 0%,
+      transparent 60%
+    ),
+    radial-gradient(90% 70% at 10% 100%, oklch(0.26 0.1 350) 0%, transparent 60%),
+    linear-gradient(180deg, oklch(0.16 0.06 330), oklch(0.11 0.04 320));
+  --gradient-rose: linear-gradient(135deg, var(--rose), oklch(0.72 0.15 340), var(--gold));
+  --shadow-glow: 0 0 60px -12px oklch(0.74 0.17 3 / 55%);
+  --shadow-soft: 0 24px 60px -24px oklch(0.05 0.05 330 / 80%);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image: var(--gradient-night);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--card) 55%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility text-gradient {
+  background: var(--gradient-rose);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility script {
+  font-family: var(--font-script);
+}
+
+@utility display {
+  font-family: var(--font-display);
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scaleY(1) translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(1.15) translateX(1px);
+    opacity: 0.85;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px -6px oklch(0.74 0.17 3 / 60%);
+  }
+  50% {
+    box-shadow: 0 0 45px -4px oklch(0.74 0.17 3 / 85%);
+  }
+}
+
+@utility animate-float-up {
+  animation: float-up linear infinite;
+}
+
+@utility animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@utility animate-flicker {
+  animation: flicker 0.5s ease-in-out infinite;
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 2.6s ease-in-out infinite;
+}
+
+.journey-content {
+  background:
+    radial-gradient(70% 28% at 50% 2%, oklch(0.34 0.12 330 / 24%), transparent 75%),
+    radial-gradient(42% 24% at 8% 48%, oklch(0.32 0.12 350 / 15%), transparent 75%),
+    radial-gradient(42% 24% at 92% 76%, oklch(0.31 0.1 55 / 10%), transparent 75%);
+}
+
+.journey-content > section:not(#journey):nth-of-type(even) {
+  background: linear-gradient(180deg, transparent, oklch(0.22 0.07 330 / 18%), transparent);
+}
+
+.letter-section {
+  background:
+    radial-gradient(38% 35% at 20% 45%, oklch(0.35 0.14 350 / 18%), transparent 75%),
+    radial-gradient(34% 32% at 82% 58%, oklch(0.35 0.11 50 / 10%), transparent 75%);
+}
+
+.letter-envelope {
+  isolation: isolate;
+  background:
+    linear-gradient(145deg, oklch(0.27 0.09 330 / 80%), oklch(0.18 0.06 330 / 88%)),
+    var(--gradient-night);
+  box-shadow: 0 30px 80px -35px oklch(0.06 0.05 330 / 85%), inset 0 1px oklch(0.98 0.02 60 / 12%);
+}
+
+.letter-envelope::before {
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid oklch(0.98 0.02 60 / 12%);
+  border-radius: 1.4rem;
+  content: "";
+  pointer-events: none;
+}
+
+.letter-sparkle {
+  animation: letter-sparkle 2.8s ease-in-out infinite;
+}
+
+.letter-sparkle:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+.letter-paper {
+  box-shadow: 0 30px 80px -30px oklch(0.05 0.05 330 / 80%), 0 0 0 1px oklch(0.98 0.02 60 / 18%);
+}
+
+.birthday-card-modal {
+  height: 100%;
+  max-height: 100svh;
+  justify-content: center;
+  perspective: 1800px;
+}
+
+.birthday-card-stage {
+  position: relative;
+  display: flex;
+  width: min(88vw, 680px);
+  height: min(68svh, 760px);
+  min-height: 300px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  perspective: 1800px;
+  touch-action: pan-y;
+}
+
+.birthday-card-stage::before {
+  position: absolute;
+  inset: 3% 4%;
+  border-radius: 1.1rem;
+  background: oklch(0.04 0.03 330 / 70%);
+  box-shadow: 0 30px 70px oklch(0.02 0.02 330 / 80%);
+  content: "";
+  transform: translateY(18px) rotate(-1deg);
+}
+
+.birthday-card-page {
+  position: absolute;
+  z-index: 2;
+  inset: 2% 1.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 8px solid oklch(0.96 0.03 75 / 90%);
+  border-radius: 1.1rem;
+  background: oklch(0.97 0.03 75);
+  box-shadow: inset 0 0 0 1px oklch(0.35 0.04 30 / 18%), 12px 18px 30px oklch(0.03 0.02 330 / 35%);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.birthday-card-edge-control {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid oklch(0.98 0.02 60 / 30%);
+  border-radius: 999px;
+  background: oklch(0.12 0.05 330 / 80%);
+  color: var(--paper);
+  font-size: 2rem;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition: border-color 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.birthday-card-edge-control:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: oklch(0.24 0.08 330 / 90%);
+  color: var(--gold);
+}
+
+.birthday-card-edge-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+}
+
+.birthday-card-edge-control-prev {
+  left: 0.65rem;
+}
+
+.birthday-card-edge-control-next {
+  right: 0.65rem;
+}
+
+.birthday-card-page::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, oklch(1 0.03 80 / 18%), transparent 25%, transparent 75%, oklch(0.1 0.03 330 / 10%));
+  content: "";
+  pointer-events: none;
+}
+
+.birthday-card-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.birthday-card-missing {
+  display: grid;
+  place-items: center;
+  gap: 0.7rem;
+  padding: 2rem;
+  color: var(--ink);
+  text-align: center;
+}
+
+.birthday-card-missing span {
+  font-size: 4rem;
+}
+
+.birthday-card-page-number {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  border-radius: 999px;
+  background: oklch(0.2 0.06 330 / 58%);
+  padding: 0.25rem 0.55rem;
+  color: var(--paper);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+}
+
+.birthday-card-control {
+  border: 1px solid oklch(0.98 0.02 60 / 22%);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  color: var(--paper);
+  font-size: 0.8rem;
+  transition: border-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+@media (max-width: 640px) {
+  .birthday-card-modal {
+    gap: 0.7rem;
+  }
+
+  .birthday-card-stage {
+    width: 92vw;
+    height: min(62svh, 650px);
+  }
+
+  .birthday-card-page {
+    border-width: 5px;
+  }
+
+  .birthday-card-edge-control {
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 1.7rem;
+  }
+
+  .birthday-card-edge-control-prev {
+    left: 0.45rem;
+  }
+
+  .birthday-card-edge-control-next {
+    right: 0.45rem;
+  }
+}
+
+.birthday-card-control:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.birthday-card-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.birthday-card-page-count {
+  color: var(--paper);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.birthday-card-song-row {
+  display: flex;
+  justify-content: center;
+}
+
+.birthday-card-song-button {
+  border: 1px solid oklch(0.85 0.12 85 / 48%);
+  border-radius: 999px;
+  background: oklch(0.85 0.12 85 / 10%);
+  padding: 0.65rem 1rem;
+  color: var(--gold);
+  font-size: 0.8rem;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+@keyframes gift-reaction-float {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.65) rotate(-10deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-220px) scale(1.25) rotate(12deg);
+  }
+}
+
+@keyframes gift-reaction-slap {
+  0%, 100% {
+    opacity: 0;
+    transform: translate(-50%, 15px) scale(0.7) rotate(-15deg);
+  }
+  20%, 75% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.1) rotate(8deg);
+  }
+}
+
+.gift-reaction {
+  position: absolute;
+  bottom: 8%;
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  animation: gift-reaction-float 2.4s ease-out forwards;
+}
+
+.gift-reaction-kiss {
+  animation-duration: 2s;
+}
+
+.gift-reaction-dislike {
+  animation-duration: 3s;
+}
+
+.gift-reaction-slap {
+  bottom: 45%;
+  animation-name: gift-reaction-slap;
+  animation-duration: 3s;
+}
+
+.birthday-card-song-button:hover {
+  border-color: var(--gold);
+  background: oklch(0.85 0.12 85 / 18%);
+}
+
+@keyframes letter-sparkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(18deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
