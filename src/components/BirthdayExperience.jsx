@@ -71,7 +71,7 @@ export default function BirthdayExperience() {
         )}
       </AnimatePresence>
 
-      {stage !== "journey" && (
+      {stage === "cake" && (
         <MusicPlayer
           autoStart={false}
           playRequest={musicRequest}
