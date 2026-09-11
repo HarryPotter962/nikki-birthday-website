@@ -149,6 +149,7 @@ export default function VideoSection() {
               poster={activeVideo.poster || undefined}
               autoPlay
               controls
+              controlsList="nodownload"
               playsInline
               preload="auto"
               onPlay={() => setIsPlaying(true)}

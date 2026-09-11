@@ -113,7 +113,15 @@ const birthdayData = {
   // ---- GIFTS ------------------------------------------------------------
   // type: "message" | "image" | "video" | "link" | "song" | "download" | "birthday-card" | "favorite-person"
   gifts: [
-    { icon: "🎵", title: "A Song For You", teaser: "Press play later.", type: "song", content: "", link: "" },
+    {
+      icon: "🎵",
+      title: "A Song For You",
+      teaser: "Press play later.",
+      type: "song",
+      content:
+        "I made this song for you and Dedicated to my Love ❤️❤️, yaar but Itna acha nhi hai yaar mane jeetna try kiya utna hi bna yaar I am really sorry yaaar ager apki expectation jeetna nhi ga paya yaar😭😭 Bas I have Tried na Kyunki aap bolte the tha na gake bhejo nhi bhejte yaar aaj try kiya hope u are happy yaar ager fir bhi nhi toh hans hi lo sun ke acha lagega ❤️🫂❤️.",
+      link: "/music/MySong.mp3",
+    },
     { icon: "🖼️", title: "A Picture", teaser: "Framed and waiting.", type: "image", content: "/images/your-picture.jpg" },
     { icon: "🥰", title: "Your Favourite Gift", teaser: "Open me and choose carefully...", type: "favorite-person", content: "/images/favorite-gift.jpg" },
     { icon: "💌", title: "Your Birthday Card", teaser: "A little something for you 💖", type: "birthday-card" },
@@ -171,7 +179,7 @@ const birthdayData = {
 
   // ---- EASTER EGGS ------------------------------------------------------
   easterEggs: {
-    heartFiveClicks: "You clicked it five times. You really are curious 👀 — okay, here's a secret: I reallly Want  to Hugggg right now Babyyyy 🫂❤️and I am so much  addicted to You apke bin nhi lagta man mera I dont want to loose u in any cost because I only want You and You only You my Princess. Next Birthday Main Apke sath Hi manunga😭❤️",
+    heartFiveClicks: "You clicked it five times. You really are curious 👀 — okay, here's a secret: I reallly Want  to Hugggg right now Babyyyy 🫂❤️and I am so much  addicted to You apke bin nhi lagta man mera bhuttt obsessed hun cutie bhut jyada ❤️😭I dont want to loose u in any cost because I only want You and You only You my Princess. Next Birthday Main Apke sath Hi manunga😭❤️",
     longPress: "Long press? Impressive 🕵️ Secret unlocked: Waah yeh kase khula yeh mushkil hai doondhna ager khol diya hai to matlab kammal ho vase bhi ho yaar aap kamal dhamaal So Secret kya hai jannene aye Happy Birthday Baby 😘 and Love You so much yaaar❤️😘AAP hi ho mere dost pyaar hamsafar sab kuch tum se hi shuru hua hai or khatam bhi Love You till my last breath Baby and I dont wanna Loose You because I am deeply In love With You😭❤️😘.",
     konami: "Okay legend 🎮 You found the hidden one. I love you.",
   },

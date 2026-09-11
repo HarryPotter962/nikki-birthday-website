@@ -96,13 +96,31 @@ function GiftContent({ gift }) {
       <p className="text-sm text-muted-foreground">Add a video path in birthdayData.js (e.g. /videos/gift.mp4)</p>
     );
   }
-  if (type === "link" || type === "song") {
+  if (type === "link") {
     return link ? (
       <a href={link} target="_blank" rel="noreferrer" className="text-rose underline underline-offset-4">
         {content || "Open it →"}
       </a>
     ) : (
       <p className="text-sm text-muted-foreground">{content || "Add a link in birthdayData.js"}</p>
+    );
+  }
+  if (type === "song") {
+    return (
+      <div className="space-y-4 text-left">
+        <div className="rounded-2xl border border-amber-400/40 bg-amber-500/10 p-4 text-sm leading-relaxed text-amber-50">
+          <p className="mb-2 font-medium uppercase tracking-[0.18em] text-amber-300">One tiny warning</p>
+          <p>{content || "I made this song for you with all my heart, even though it may not be perfect. I hope you still like it."}</p>
+        </div>
+        {link ? (
+          <audio controls controlsList="nodownload" preload="metadata" className="w-full">
+            <source src={link} />
+            Your browser does not support the audio element.
+          </audio>
+        ) : (
+          <p className="text-sm text-muted-foreground">Add a song in public/music and update the link in birthdayData.js</p>
+        )}
+      </div>
     );
   }
   if (type === "download") {
