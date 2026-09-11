@@ -93,18 +93,31 @@ export default function VideoSection() {
     setIsDownloading(true);
 
     try {
-      const response = await fetch(activeVideo.src);
+      const response = await fetch(activeVideo.src, { cache: "no-store" });
       if (!response.ok) throw new Error("Video download failed");
-      const blobUrl = URL.createObjectURL(await response.blob());
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
       link.download = filename;
+      link.rel = "noopener noreferrer";
       document.body.appendChild(link);
       link.click();
-      link.remove();
-      URL.revokeObjectURL(blobUrl);
+
+      setTimeout(() => {
+        link.remove();
+        URL.revokeObjectURL(blobUrl);
+      }, 200);
     } catch {
-      window.open(activeVideo.src, "_blank", "noopener,noreferrer");
+      const fallbackLink = document.createElement("a");
+      fallbackLink.href = activeVideo.src;
+      fallbackLink.download = filename;
+      fallbackLink.target = "_blank";
+      fallbackLink.rel = "noopener noreferrer";
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      fallbackLink.remove();
     } finally {
       setIsDownloading(false);
     }
@@ -149,13 +162,7 @@ export default function VideoSection() {
                 <p className="mt-1 text-sm text-muted-foreground">{activeVideo.description}</p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button type="button" onClick={pauseVideo} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground transition hover:opacity-90">
-                  {isPlaying ? <Pause size={16} /> : <Play size={16} />} {isPlaying ? "Pause" : "Play"}
-                </button>
-                <button type="button" onClick={stopVideo} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted">
-                  <Square size={16} /> Stop
-                </button>
-                <button type="button" onClick={downloadVideo} disabled={isDownloading} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition hover:bg-muted disabled:cursor-wait disabled:opacity-60">
+                <button type="button" onClick={downloadVideo} disabled={isDownloading} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground transition hover:opacity-90 disabled:cursor-wait disabled:opacity-60">
                   <Download size={16} /> Download
                 </button>
               </div>

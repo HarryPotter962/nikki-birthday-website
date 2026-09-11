@@ -157,21 +157,22 @@ const birthdayData = {
   final: {
     tease: "You've reached the end...",
     tease2: "But I saved one last thing for you.",
-    button: "Open Your Final Surprise ❤️",
+    button: "Open Your Last Message From  ❤️",
     // Each line reveals slowly, one after another.
     message: [
       "Nikki,",
       "I hope today reminds you of just how special you are For me Gudiya.",
       "Not because of what you do for anyone.",
-      "But simply because you exist and loved  me .",
+      "But simply because you exist and loved  me and Haan Next Birthday apke sath hi manunga main.😘😭❤️",
       "Happy Birthday Once again my Birthday Girl. ❤️",
+      
     ],
   },
 
   // ---- EASTER EGGS ------------------------------------------------------
   easterEggs: {
-    heartFiveClicks: "You clicked it five times. You really are curious 👀 — okay, here's a secret: this website took me three nights and I'd do it again.",
-    longPress: "Long press? Impressive 🕵️ Secret unlocked: the first photo I ever saved of you is still on my phone.",
+    heartFiveClicks: "You clicked it five times. You really are curious 👀 — okay, here's a secret: I reallly Want  to Hugggg right now Babyyyy 🫂❤️and I am so much  addicted to You apke bin nhi lagta man mera I dont want to loose u in any cost because I only want You and You only You my Princess. Next Birthday Main Apke sath Hi manunga😭❤️",
+    longPress: "Long press? Impressive 🕵️ Secret unlocked: Waah yeh kase khula yeh mushkil hai doondhna ager khol diya hai to matlab kammal ho vase bhi ho yaar aap kamal dhamaal So Secret kya hai jannene aye Happy Birthday Baby 😘 and Love You so much yaaar❤️😘AAP hi ho mere dost pyaar hamsafar sab kuch tum se hi shuru hua hai or khatam bhi Love You till my last breath Baby and I dont wanna Loose You because I am deeply In love With You😭❤️😘.",
     konami: "Okay legend 🎮 You found the hidden one. I love you.",
   },
 

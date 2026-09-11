@@ -77,8 +77,8 @@ export default function LoveReasons() {
               <motion.div key="complete" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 mt-8 rounded-2xl border border-gold/40 bg-gold/10 p-6 text-center">
                 <p className="text-4xl">🎉</p>
                 <h3 className="script text-gradient mt-3 text-4xl sm:text-5xl">You found all my love!</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">I love you so so so so so much, Nikki baby. ❤️
-Sach mein, words kam pad jaate hain tumhe batane ke liye ki main tumse kitna pyaar karta hoon. Bas itna pata hai ki meri har khushi mein tum ho, aur main har din tumhe aur zyada love karta hoon. Meri Princess Baby, you mean the world to me. 🥹❤️
+                <p className="mt-3 leading-relaxed text-muted-foreground">Happy Birthday Too my, baby. ❤️
+        badi jarur ho gyi ho lekin abhi bachi hi  ho mere liye Little Baby. Bas ase hi Smile Karet raho Or kya hi likhun kash main bhi apke sath birthday celebrate kar sakta 😭 But chalo koi na kabhi to karunga just wait for it Love You So muchh yaaaar 😭 At Last You are Extremely Beautifull Yaar🥹❤️
  ❤️</p>
                 <button onClick={() => celebrate("big")} className="mt-5 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground">Celebrate our match ✨</button>
               </motion.div>

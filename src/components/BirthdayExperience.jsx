@@ -50,7 +50,11 @@ export default function BirthdayExperience() {
               <FloatingHearts count={8} />
             </ClientOnly>
             <Navigation />
-            <BirthdayCelebration onSecret={eggs.clickHeart} />
+            <BirthdayCelebration
+              onSecret={eggs.clickHeart}
+              onSecretHoldStart={eggs.startLongPress}
+              onSecretHoldEnd={eggs.cancelLongPress}
+            />
             <LetterSection />
             <VideoSection />
             <GiftsSection />

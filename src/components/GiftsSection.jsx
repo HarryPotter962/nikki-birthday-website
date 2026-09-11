@@ -30,7 +30,7 @@ function FavoritePersonContent({ gift }) {
   return (
     <div className="space-y-4 text-center">
       <p className="text-lg font-medium text-rose">
-        {revealed ? "Surprise! It&apos;s meee, baby! 😘" : "You need a gift? You know what is your favourite gift?"}
+        {revealed ? "Surprise! Its  meee, baby! 😘" : "You need a gift? You know what is your favourite gift?"}
       </p>
       <div className="relative overflow-hidden rounded-2xl bg-secondary/50 p-2">
         {revealed ? (
@@ -56,16 +56,16 @@ function FavoritePersonContent({ gift }) {
       </div>
       <div className="flex flex-wrap justify-center gap-2">
         <button type="button" onClick={() => chooseReaction("kiss")} className="rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground transition hover:opacity-90">
-          Kiss him 💋
+          Kiss it 💋
         </button>
         <button type="button" onClick={() => chooseReaction("slap")} className="rounded-full bg-secondary px-4 py-2 text-sm transition hover:bg-muted">
-          Slap him 🖐️
+          Slap it 🖐️
         </button>
         <button type="button" onClick={() => chooseReaction("dislike")} className="rounded-full border border-rose/40 px-4 py-2 text-sm transition hover:border-rose">
-          I don&apos;t like him 😭
+          I don&apos;t like it 😭
         </button>
       </div>
-      <p className="text-sm leading-relaxed text-muted-foreground">You are cutie. Don&apos;t worry, I will give you a gift. Wait for some time. ❤️</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">Are Cutie Don&apos;t worry, I will give you a gift. Wait for some time. ❤️</p>
     </div>
   );
 }

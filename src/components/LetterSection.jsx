@@ -24,6 +24,16 @@ export default function LetterSection() {
   const [downloading, setDownloading] = useState(false);
   const letter = data.letter;
 
+  const toPdfSafeText = (value = "") =>
+    String(value)
+      .normalize("NFKC")
+      .replace(/[♥♡✦✧✨💌❤💕]/g, "")
+      .replace(/[\u{1F300}-\u{1FAFF}]/gu, "")
+      .replace(/[\u2018\u2019]/g, "'")
+      .replace(/[\u201C\u201D]/g, '"')
+      .replace(/\s+/g, " ")
+      .trim();
+
   const downloadPdf = async () => {
     setDownloading(true);
     try {
@@ -31,6 +41,12 @@ export default function LetterSection() {
       const doc = new jsPDF({ unit: "pt", format: "a4" });
       const W = doc.internal.pageSize.getWidth();
       const H = doc.internal.pageSize.getHeight();
+
+      const greeting = toPdfSafeText(letter.greeting);
+      const signOff = toPdfSafeText(letter.signOff);
+      const sender = toPdfSafeText(data.from);
+      const title = `For ${toPdfSafeText(data.name)}`;
+      const paragraphs = letter.paragraphs.map((paragraph) => toPdfSafeText(paragraph));
 
       // Cream paper
       doc.setFillColor(253, 248, 243);
@@ -45,20 +61,20 @@ export default function LetterSection() {
       doc.setTextColor(176, 74, 98);
       doc.setFont("times", "italic");
       doc.setFontSize(30);
-      doc.text(`For ${data.name}`, W / 2, 110, { align: "center" });
+      doc.text(title, W / 2, 110, { align: "center" });
       doc.setFontSize(11);
       doc.setFont("helvetica", "normal");
-      doc.text("♥  H A P P Y   B I R T H D A Y  ♥", W / 2, 134, { align: "center" });
+      doc.text("H A P P Y   B I R T H D A Y", W / 2, 134, { align: "center" });
 
       doc.setTextColor(60, 45, 50);
       doc.setFont("times", "italic");
       doc.setFontSize(16);
-      doc.text(letter.greeting, 72, 186);
+      doc.text(greeting, 72, 186);
 
       doc.setFont("times", "normal");
       doc.setFontSize(12.5);
       let y = 216;
-      for (const p of letter.paragraphs) {
+      for (const p of paragraphs) {
         const lines = doc.splitTextToSize(p, W - 144);
         for (const line of lines) {
           if (y > H - 150) {
@@ -76,11 +92,11 @@ export default function LetterSection() {
       doc.setFont("times", "italic");
       doc.setTextColor(176, 74, 98);
       doc.setFontSize(14);
-      doc.text(letter.signOff, 72, Math.min(y + 24, H - 110));
+      doc.text(signOff, 72, Math.min(y + 24, H - 110));
       doc.setFontSize(18);
-      doc.text(data.from, 72, Math.min(y + 52, H - 84));
+      doc.text(sender, 72, Math.min(y + 52, H - 84));
 
-      doc.save(`A-Letter-For-${data.name}.pdf`);
+      doc.save(`A-Letter-For-${toPdfSafeText(data.name)}.pdf`);
       celebrate("hearts");
     } catch (e) {
       console.error("PDF generation failed", e);

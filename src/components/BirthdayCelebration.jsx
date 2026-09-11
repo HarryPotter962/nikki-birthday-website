@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import data from "../data/birthdayData.js";
 
-export default function BirthdayCelebration({ onSecret }) {
+export default function BirthdayCelebration({ onSecret, onSecretHoldStart, onSecretHoldEnd }) {
   return (
     <section id="journey" className="relative z-10 scroll-mt-16 px-5 pt-28 pb-24 sm:pt-40 sm:pb-32">
       <div className="mx-auto max-w-6xl">
@@ -24,6 +24,10 @@ export default function BirthdayCelebration({ onSecret }) {
           </p>
           <button
             onClick={onSecret}
+            onPointerDown={onSecretHoldStart}
+            onPointerUp={onSecretHoldEnd}
+            onPointerCancel={onSecretHoldEnd}
+            onPointerLeave={onSecretHoldEnd}
             aria-label="A little heart"
             className="group mt-8 inline-flex items-center gap-3 rounded-full border border-border/70 bg-background/20 px-5 py-2.5 text-sm text-muted-foreground backdrop-blur transition-colors hover:border-rose/60 hover:text-foreground"
           >
